@@ -63,4 +63,22 @@ class Mahasiswa extends RestController
             $this->response(['status' => false, 'msg' => $save['msg']], RestController::HTTP_INTERNAL_ERROR);
         }
     }
+    public function index_put()
+    {
+        $nipx = $this->put('nip');
+        $data = [
+            'nip' => $this->put('nip'),
+            'nim' => $this->put('nim'),
+            'nama' => $this->put('nama'),
+            'jurusan' => $this->put('jurusan')
+
+        ];
+
+        $save = $this->M_mahasiswa->update($nipx, $data);
+        if ($save['status']) {
+            $this->response(['status' => true, 'msg' => $save['data'] . ' Data berhasil di Ubah'], RestController::HTTP_OK);
+        } else {
+            $this->response(['status' => false, 'msg' => $save['msg']], RestController::HTTP_INTERNAL_ERROR);
+        }
+    }
 }

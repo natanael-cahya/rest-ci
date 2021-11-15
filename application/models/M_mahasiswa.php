@@ -40,4 +40,19 @@ class M_Mahasiswa extends CI_Model
             return ['status' => false, 'msg' => $ex->getMessage()];
         }
     }
+
+    public function update($nip, $data)
+    {
+        try {
+            $this->db->update('mahasiswa', $data, ['nip' => $nip]);
+            $error = $this->db->error();
+            if (!empty($error['code'])) {
+                throw new Exception('Terjadi Kesalahan saat insert' . $error['message']);
+                return false;
+            }
+            return ['status' => true, 'data' => $this->db->affected_rows()];
+        } catch (Exception $ex) {
+            return ['status' => false, 'msg' => $ex->getMessage()];
+        }
+    }
 }
