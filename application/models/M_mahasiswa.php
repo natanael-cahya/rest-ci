@@ -26,4 +26,18 @@ class M_Mahasiswa extends CI_Model
     {
         return $this->db->get('mahasiswa')->num_rows();
     }
+    public function add($data)
+    {
+        try {
+            $this->db->insert('mahasiswa', $data);
+            $error = $this->db->error();
+            if (!empty($error['code'])) {
+                throw new Exception('Terjadi Kesalahan saat insert' . $error['message']);
+                return false;
+            }
+            return ['status' => true, 'data' => $this->db->affected_rows()];
+        } catch (Exception $ex) {
+            return ['status' => false, 'msg' => $ex->getMessage()];
+        }
+    }
 }

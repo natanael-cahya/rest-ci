@@ -47,4 +47,20 @@ class Mahasiswa extends RestController
             }
         }
     }
+    public function index_post()
+    {
+        $data = [
+            'nip' => $this->post('nip'),
+            'nim' => $this->post('nim'),
+            'nama' => $this->post('nama'),
+            'jurusan' => $this->post('jurusan')
+
+        ];
+        $save = $this->M_mahasiswa->add($data);
+        if ($save['status']) {
+            $this->response(['status' => true, 'msg' => $save['data'] . ' Data berhasil di tambah'], RestController::HTTP_CREATED);
+        } else {
+            $this->response(['status' => false, 'msg' => $save['msg']], RestController::HTTP_INTERNAL_ERROR);
+        }
+    }
 }
