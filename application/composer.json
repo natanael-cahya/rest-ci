@@ -1,0 +1,8 @@
+{
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "require": {
+        "chriskacerguis/codeigniter-restserver": "^3.1"
+    }
+}
